@@ -1,0 +1,35 @@
+[Unit]
+Description=Deckva Telegram Admin Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# Пользователь, от которого будет запущен сервис
+User=root
+Group=root
+
+# Свой каталог, не /deckva_web_client
+WorkingDirectory=/deckva_bot
+
+# Свой env. Порт не задаём: бот на long polling и не слушает сокет.
+# Вебка остаётся на PORT=3000 у deckva-web-client.
+EnvironmentFile=/deckva_bot/.env
+Environment=NODE_ENV=production
+
+ExecStart=/usr/bin/npm run start
+
+Restart=on-failure
+RestartSec=5
+KillSignal=SIGINT
+TimeoutStopSec=60
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=deckva-bot
+
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
