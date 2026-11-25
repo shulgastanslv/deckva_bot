@@ -10,12 +10,12 @@ Type=simple
 User=root
 Group=root
 
-# Свой каталог, не /deckva_web_client
-WorkingDirectory=/deckva_bot
+# Каталог root, не корень диска: на VPS проект лежит в ~/deckva_bot
+WorkingDirectory=/root/deckva_bot
 
 # Свой env. Порт не задаём: бот на long polling и не слушает сокет.
 # Вебка остаётся на PORT=3000 у deckva-web-client.
-EnvironmentFile=/deckva_bot/.env
+EnvironmentFile=/root/deckva_bot/.env
 Environment=NODE_ENV=production
 
 ExecStart=/usr/bin/npm run start
